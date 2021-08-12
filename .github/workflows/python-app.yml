@@ -31,52 +31,9 @@ jobs:
           key: build-${{ github.run_id }}
           restore-keys: |
             build-
-      - name: Set proxy
+      - name: start
+        if: always()
         env:
-          config: ${{ secrets.ss_config }}
+          userpass: ${{ secrets.userpass }}
         run: |
-          sudo apt-get install shadowsocks-libev simple-obfs proxychains-ng
-          sudo -E sh -c 'echo $config|base64 -d > /etc/shadowsocks-libev/config.json'
-          sudo sh -c 'echo "\
-          [Unit]
-          Description=Shadowsocks
-          After=network.target
-          [Service]
-          ExecStart=ss-local -c /etc/shadowsocks-libev/config.json
-          Rnestart=on-abort
-          [Install]
-          WantedBy=multi-user.target\
-          ">/etc/systemd/system/shadowsocks.service'
-          sudo systemctl daemon-reload
-          sudo systemctl start shadowsocks
-          sleep 3s
-          systemctl status --no-pager shadowsocks
-          sudo sed -i 's/socks4 	127.0.0.1 9050/socks5 127.0.0.1 1080/g' /etc/proxychains4.conf
-          sudo sed -i 's/#quiet_mode/quiet_mode/g' /etc/proxychains4.conf
-      - name: Account 1
-        if: always()
-        env:
-          userpass: ${{ secrets.userpass1 }}
-        uses: nick-invision/retry@v2
-        with:
-          timeout_minutes: 60
-          max_attempts: 3
-          command: proxychains python -u pi.py
-      - name: Account 5
-        if: always()
-        env:
-          userpass: ${{ secrets.userpass5 }}
-        uses: nick-invision/retry@v2
-        with:
-          timeout_minutes: 60
-          max_attempts: 3
-          command: proxychains python -u pi.py
-      - name: Account 6
-        if: always()
-        env:
-          userpass: ${{ secrets.userpass6 }}
-        uses: nick-invision/retry@v2
-        with:
-          timeout_minutes: 60
-          max_attempts: 3
-          command: proxychains python -u pi.py
+          python  pi.py
