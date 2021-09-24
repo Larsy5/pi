@@ -19,7 +19,7 @@ if on=='schedule':
 else:
   timing=False
 userpass=os.getenv('userpass')
-userpass=userpass.split()
+userpass=userpass.split(',')
 a = 0
 b = 1
 for i in range(2):
