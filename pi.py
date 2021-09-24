@@ -20,8 +20,6 @@ else:
   timing=False
 userpass=os.getenv('userpass')
 userpass=userpass.split()
-username=userpass[0]
-password=userpass[1]
 try:
   with open('tokens.txt','rb') as f:
     tokens=pickle.load(f)
@@ -34,7 +32,10 @@ except KeyError:
 session=requests.Session()
 session.headers.update({'authorization':'Bearer '+token})
 if token=='' or session.get(api+'/api/pi').status_code!=200:
-  login=session.post(api+'/api/password_sign_in',data={'phone_number':username,'password':password}).json()
+  for i in range(4)
+    login=session.post(api+'/api/password_sign_in',data={'phone_number':userpass[i],'password':userpass[++i]}).json()
+    i++
+    print(i)
   if 'error' in login:
     raise Exception(login['error'])
   else:
