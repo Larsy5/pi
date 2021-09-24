@@ -25,7 +25,7 @@ b = 1
 for i in range(2):
     username=userpass[a]
     password=userpass[b]
-    
+    print(username)
     try:
         with open('tokens.txt','rb') as f:
             tokens=pickle.load(f)
