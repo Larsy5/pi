@@ -67,7 +67,9 @@ for i in range(2):
         thetime=random.randint(5,20)
         time.sleep(thetime*60)
         print('随机等待%smin'%thetime)
-
+    a+=1
+    b+=1
+    
 @retry(stop_max_attempt_number=10, wait_random_min=5*60000, wait_random_max=20*60000)
 def reward():
   proof=session.post(api+'/api/proof_of_presences',data={'recaptcha_token':None})
