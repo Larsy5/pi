@@ -39,7 +39,6 @@ else:
   timing=False
 userpass=os.getenv('userpass')
 userpass=userpass.split(',')
-print(userpass)
 a = 0
 b = 1
 for i in range(2):
