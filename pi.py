@@ -34,8 +34,8 @@ session.headers.update({'authorization':'Bearer '+token})
 if token=='' or session.get(api+'/api/pi').status_code!=200:
   a = 0
   for i in range(2):
-    login=session.post(api+'/api/password_sign_in',data={'phone_number':userpass[a],'password':userpass[++a]}).json()
-    a++
+    login=session.post(api+'/api/password_sign_in',data={'phone_number':userpass[a],'password':userpass[a+=1]}).json()
+    a+=1
     print(a)
   if 'error' in login:
     raise Exception(login['error'])
