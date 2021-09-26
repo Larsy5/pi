@@ -76,11 +76,11 @@ for i in range(2):
         diff=expires_at-now
         tmhour=time.localtime().tm_hour
         expires_hour=time.localtime(expires_at).tm_hour
-    if tmhour!=expires_hour or diff>60:
-        print('过期时间超过一小时')
-        continue
-    else:
-        time.sleep(diff)
+        if tmhour!=expires_hour or diff>60:
+            print('过期时间超过一小时')
+            continue
+        else:
+            time.sleep(diff)
 
     if timing==True:
         thetime=random.randint(5,20)
