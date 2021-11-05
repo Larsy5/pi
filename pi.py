@@ -41,7 +41,7 @@ userpass=os.getenv('userpass')
 userpass=userpass.split(',')
 a = 0
 b = 1
-for i in range(42):
+for i in range(40):
     username=userpass[a]
     password=userpass[b]
     try:
